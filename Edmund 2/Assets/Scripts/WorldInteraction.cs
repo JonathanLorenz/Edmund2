@@ -59,7 +59,6 @@ public class WorldInteraction : MonoBehaviour
             deathSfx.Play();
             fadePanel.CrossFadeAlpha(1f, 3f, false);
             StartCoroutine(WaitABit(3f));
-            
         }
     }
 
