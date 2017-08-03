@@ -51,14 +51,15 @@ public class WorldInteraction : MonoBehaviour
         if (other.tag == "Next Scene Trigger")
             SceneManager.LoadScene(currentScene.buildIndex + 1);
         //spikes trigger
-
-        //spikes or killbox
         else if (other.tag == "Spikes Trigger")
         {
             StopsPlayer();
-            deathSfx.Play();
-            fadePanel.CrossFadeAlpha(1f, 3f, false);
-            StartCoroutine(WaitABit(3f));
+        }
+        //spikes or killbox
+        else if (other.tag == "Spikes")
+        {
+            KillPlayer();
+            StartCoroutine(WaitAndReload(3f));
         }
     }
 
@@ -67,7 +68,13 @@ public class WorldInteraction : MonoBehaviour
         playerAgent.isStopped = true;
     }
 
-    IEnumerator WaitABit (float timeInSeconds)
+    void KillPlayer()
+    {
+        deathSfx.Play();
+        fadePanel.CrossFadeAlpha(1f, 3f, false);
+    }
+
+    IEnumerator WaitAndReload (float timeInSeconds)
     {
         yield return new WaitForSeconds(timeInSeconds);
         SceneManager.LoadScene(currentScene.buildIndex);
