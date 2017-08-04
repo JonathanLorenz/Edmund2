@@ -5,7 +5,8 @@ using UnityEngine;
 public class FloorButton : MonoBehaviour
 {
     public Animator[] objectsToAnimate;
-    public GameObject triggerToDisable;
+    public GameObject[] objectsToDisable;
+    public GameObject[] objectsToEnable;
     public AudioSource sfx;
 
     private void OnTriggerEnter(Collider other)
@@ -18,8 +19,12 @@ public class FloorButton : MonoBehaviour
                 objectToAnimate.SetTrigger("Walks On Floor Button");
                 sfx.Play();
             }
-            //desactiver trigger
-            triggerToDisable.SetActive(false);
+            //desactiver objects
+            foreach (GameObject objectToDisable in objectsToDisable)
+                objectToDisable.SetActive(false);
+            //activer objects
+            foreach (GameObject objectToEnable in objectsToEnable)
+                objectToEnable.SetActive(true);
         }
     }
 }

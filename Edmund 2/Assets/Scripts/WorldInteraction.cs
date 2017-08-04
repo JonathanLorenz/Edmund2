@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class WorldInteraction : MonoBehaviour
 {
     NavMeshAgent playerAgent;
+    Animator playerAnimator;
     Scene currentScene;
+    Collider playerCollider;
     public AudioSource deathSfx;
     public Image fadePanel;
 
@@ -16,6 +18,8 @@ public class WorldInteraction : MonoBehaviour
     {
         playerAgent = GetComponent<NavMeshAgent>();
         currentScene = SceneManager.GetActiveScene();
+        playerAnimator = GetComponentInChildren<Animator>();
+        playerCollider = GetComponent<BoxCollider>();
     }
 
     private void Update()
@@ -61,7 +65,26 @@ public class WorldInteraction : MonoBehaviour
             KillPlayer();
             StartCoroutine(WaitAndReload(3f));
         }
+        else if (other.tag == "Boulder")
+        {
+            playerCollider.enabled = false;
+            playerAnimator.SetTrigger("Flattened By Boulder");
+            StopsPlayer();
+            KillPlayer();
+            StartCoroutine(WaitAndReload(3f));
+        }
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.rigidbody.tag == "Boulder")
+    //    {
+    //        playerAnimator.SetTrigger("Flattened By Boulder");
+    //        StopsPlayer();
+    //        KillPlayer();
+    //        StartCoroutine(WaitAndReload(3f));
+    //    }
+    //}
 
     void StopsPlayer()
     {
