@@ -75,17 +75,6 @@ public class WorldInteraction : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.rigidbody.tag == "Boulder")
-    //    {
-    //        playerAnimator.SetTrigger("Flattened By Boulder");
-    //        StopsPlayer();
-    //        KillPlayer();
-    //        StartCoroutine(WaitAndReload(3f));
-    //    }
-    //}
-
     void StopsPlayer()
     {
         playerAgent.isStopped = true;
